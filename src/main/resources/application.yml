@@ -1,0 +1,50 @@
+spring:
+  profiles:
+    default: local # 프로필 기본값
+
+  datasource:
+    url: jdbc:h2:mem:~/cafeKiostApplication
+    driver-class-name: org.h2.Driver # InMemoryDB
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: none # Production에서 DB 날리는 실수 방지
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  jpa:
+    hibernate:
+      ddl-auto: create # 서버 기동 시 자동으로 테이블 생성하기 위함. create, drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true # 쿼리 좀 더 예쁘게 보기 위함
+    defer-datasource-initialization: true # (2.5~) Hibernate 초기화 이후 data.sql 실행 --> 매번 샘플 데이터 넣기 힘드니까 미리 정의한다. 빠르게 개발하기 위해 사용함
+
+  h2:
+    console:
+      enabled: true # h2 콘솔로 접근할 수 있도록 설정.
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: never # 테스트 상에서 given Data를 사용할 것이기 때문에 미사용 설정한다.
