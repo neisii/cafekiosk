@@ -1,30 +1,23 @@
 package sample.cafekiosk.spring.domain.product;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import sample.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
-import sample.cafekiosk.spring.api.service.order.response.OrderResponse;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
-import static org.junit.jupiter.api.Assertions.*;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
 //@SpringBootTest // Spring Server 를 띄워서 테스트 한다. (권장)
 @ActiveProfiles("test") // 사용할 프로필 지정
-@DataJpaTest // JPA 관련 Bean만 주입하여 SpringBootTest 보다 가벼워 좀 더 빠르다.
+//@SpringBootTest
+@DataJpaTest // JPA 관련 Bean만 주입하여 SpringBootTest 보다 가벼워 좀 더 빠르다. //
 class ProductRepositoryTest {
-
 
   @Autowired
   private ProductRepository productRepository;
