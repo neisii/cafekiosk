@@ -2,6 +2,7 @@ spring:
   profiles:
     default: local # 프로필 기본값
 
+# http://localhost:8080/h2-console/login.do
   datasource:
     url: jdbc:h2:mem:~/cafeKiostApplication
     driver-class-name: org.h2.Driver # InMemoryDB
