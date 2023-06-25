@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
-  List<Stock> findAllByProductNumberIn(List<String> strings);
+  List<Stock> findAllByProductNumberIn(List<String> productNumbers);
 }

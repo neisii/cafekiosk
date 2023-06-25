@@ -15,9 +15,9 @@ import static org.assertj.core.groups.Tuple.tuple;
 class StockRepositoryTest {
 
   @Autowired
-  StockRepository stockRepository;
+  private StockRepository stockRepository;
 
-  @DisplayName("상품번호 목록으로 상품을 조회한다.")
+  @DisplayName("상품번호 목록으로 재고를 조회한다.")
   @Test
   void findAllByProductNumberIn() {
 
@@ -30,7 +30,6 @@ class StockRepositoryTest {
 
     // when
     List<Stock> stocks = stockRepository.findAllByProductNumberIn(List.of("001", "002"));
-
 
     // then
     Assertions.assertThat(stocks).hasSize(2)

@@ -57,7 +57,7 @@ class CafeKioskTest {
 
     @Test
     void remove() {
-      CafeKiosk cafeKiosk  = new CafeKiosk();
+      CafeKiosk cafeKiosk = new CafeKiosk();
       Americano americano = new Americano();
 
       cafeKiosk.add(americano);
@@ -69,7 +69,7 @@ class CafeKioskTest {
 
     @Test
     void clear() {
-      CafeKiosk cafeKiosk  = new CafeKiosk();
+      CafeKiosk cafeKiosk = new CafeKiosk();
       Americano americano = new Americano();
       Latte latte = new Latte();
 
@@ -87,7 +87,7 @@ class CafeKioskTest {
     void calculateTotalPrice() {
       // given
       // 객체 세팅
-      CafeKiosk cafeKiosk  = new CafeKiosk();
+      CafeKiosk cafeKiosk = new CafeKiosk();
       Americano americano = new Americano();
       Latte latte = new Latte();
 
@@ -106,7 +106,7 @@ class CafeKioskTest {
 
     @Test
     void createOrder() {
-      CafeKiosk cafeKiosk  = new CafeKiosk();
+      CafeKiosk cafeKiosk = new CafeKiosk();
       Americano americano = new Americano();
 
       cafeKiosk.add(americano, 1);
@@ -120,7 +120,7 @@ class CafeKioskTest {
     @DisplayName("영업 시작 시간과 영업 종료 시간 이내에 주문을 생성할 수 있다.")
     @Test
     void createOrderWithCurrentTime() { // Test는 경계값
-      CafeKiosk cafeKiosk  = new CafeKiosk();
+      CafeKiosk cafeKiosk = new CafeKiosk();
       Americano americano = new Americano();
 
       cafeKiosk.add(americano, 1);
@@ -134,7 +134,7 @@ class CafeKioskTest {
     @DisplayName("영업 시작 시간 이전에는 주문을 생성할 수 없다.")
     @Test
     void createOrderOutsideOpenTime() { // Test는 경계값2
-      CafeKiosk cafeKiosk  = new CafeKiosk();
+      CafeKiosk cafeKiosk = new CafeKiosk();
       Americano americano = new Americano();
 
       cafeKiosk.add(americano, 1);
