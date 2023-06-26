@@ -106,10 +106,10 @@ class ProductRepositoryTest {
   private Product createProduct(String number, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
     return Product.builder()
             .productNumber(number)
-            .type(type)
-            .sellingStatus(sellingStatus)
-            .name(name)
-            .price(price)
+        .type(type)
+        .sellingStatus(sellingStatus)
+        .name(name)
+        .price(price)
             .build();
   }
 
