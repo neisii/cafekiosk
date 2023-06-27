@@ -3,7 +3,7 @@ package sample.cafekiosk.spring.api.service.product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sample.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import sample.cafekiosk.spring.api.controller.product.dto.request.ProductCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductRepository;
@@ -32,7 +32,7 @@ public class ProductService {
   // 예: DB에 유니크키 제약 걸기 후 재시도 n회
   // 크리티컬한 경우 예: productNumber 같이 시퀀셜 값보다 UUID와 같은 유니크 아이디를 사용한다.
   @Transactional
-  public ProductResponse createProduct(ProductCreateRequest request) {
+  public ProductResponse createProduct(ProductCreateServiceRequest request) {
 
     // nextProductNumber
     String nextProductNumber = createNextProductNumber();

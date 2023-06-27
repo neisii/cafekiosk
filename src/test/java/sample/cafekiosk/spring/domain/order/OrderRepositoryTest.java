@@ -1,11 +1,14 @@
 package sample.cafekiosk.spring.domain.order;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import sample.cafekiosk.spring.domain.product.Product;
+import sample.cafekiosk.spring.domain.product.ProductRepository;
 import sample.cafekiosk.spring.domain.product.ProductSellingStatus;
 import sample.cafekiosk.spring.domain.product.ProductType;
 
@@ -16,13 +19,20 @@ import java.util.List;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-//@ActiveProfiles("test")
-//@SpringBootTest
-@DataJpaTest
+@SpringBootTest
 class OrderRepositoryTest {
 
   @Autowired
+  private ProductRepository productRepository;
+
+  @Autowired
   private OrderRepository orderRepository;
+
+  @AfterEach
+  void tearDown() {
+    productRepository.deleteAllInBatch();
+    orderRepository.deleteAllInBatch();
+  }
 
   @DisplayName("주문 완료 시간과 주문 상태로 주문 내역을 찾는다. 주문 완료 시간과 주문 상태를 입력하지 않는 경우 예외가 발생 한다.")
   @Test
@@ -34,8 +44,15 @@ class OrderRepositoryTest {
     Product product2 = createProduct("002", HANDMADE, HOLD, "카페라떼", 4500);
     Product product3 = createProduct("003", HANDMADE, STOP_SELLING, "팥빙수", 7000);
 
-    Order order1 = Order.create(List.of(product1, product2, product3), registerDateTime);
-    orderRepository.saveAll(List.of(order1));
+    List<Product> products = List.of(product1, product2, product3);
+    productRepository.saveAll(products);
+
+    Order order = Order.builder()
+        .products(products)
+        .orderStatus(OrderStatus.PAYMENT_COMPLETED)
+        .registeredDateTime(registerDateTime)
+        .build();
+    orderRepository.saveAll(List.of(order));
 
     // when
     List<Order> orders = orderRepository.findOrdersBy(orderDate.atStartOfDay(), orderDate.plusDays(1).atStartOfDay(), OrderStatus.PAYMENT_COMPLETED);

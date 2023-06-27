@@ -2,14 +2,9 @@ package sample.cafekiosk.spring.api.service.order.response;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.stereotype.Service;
-import sample.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafekiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.order.Order;
-import sample.cafekiosk.spring.domain.order.OrderStatus;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -8,12 +8,12 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor // @RequestBody 생성자 기반으로 객체 생성하기 위함
-public class OrderCreateRequest {
+public class OrderCreateServiceRequest {
 
   private List<String> productNumbers;
 
   @Builder
-  private OrderCreateRequest(List<String> productNumbers) {
+  private OrderCreateServiceRequest(List<String> productNumbers) {
     this.productNumbers = productNumbers;
   }
 
