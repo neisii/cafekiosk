@@ -28,7 +28,7 @@ public class Order extends BaseEntity {
 
   private int totalPrice;
 
-  private LocalDateTime registeredDateTime;
+  private LocalDateTime registeredDateTime; // 주문을 완료한 시간
 
 
   @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // order에 변경사항이 생기면 같이 변경되도록
