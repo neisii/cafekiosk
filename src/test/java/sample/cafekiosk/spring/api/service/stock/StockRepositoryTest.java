@@ -9,7 +9,6 @@ import sample.cafekiosk.spring.domain.stock.Stock;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 
 @DataJpaTest
@@ -33,7 +32,7 @@ class StockRepositoryTest {
     List<Stock> stocks = stockRepository.findAllByProductNumberIn(List.of("001", "002"));
 
     // then
-    assertThat(stocks).hasSize(2)
+    Assertions.assertThat(stocks).hasSize(2)
         .extracting("productNumber", "quantity")
         .containsExactlyInAnyOrder(
             tuple("001", 1),
