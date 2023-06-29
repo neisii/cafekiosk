@@ -64,4 +64,5 @@ class MailServiceTest {
 
     verify(mailSendHistoryRepository, times(1)).save(any(MailSendHistory.class));
   }
+
 }
