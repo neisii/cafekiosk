@@ -15,9 +15,7 @@ public class MailService {
 
   // 메일 전송
   public boolean sendMail(String fromEmail, String toEmail, String subject, String content) {
-
     boolean result = mailSendClient.sendMail(fromEmail, toEmail, subject, content);
-
     if (result) {
       mailSendHistoryRepository.save(MailSendHistory.builder()
           .fromEmail(fromEmail)
@@ -25,6 +23,10 @@ public class MailService {
           .subject(subject)
           .content(content)
           .build());
+
+      mailSendClient.a();
+      mailSendClient.b();
+      mailSendClient.c();
 
       return true;
     }
