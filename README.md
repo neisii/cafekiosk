@@ -4,6 +4,7 @@ cafekiosk practical testing
 
 [Practical Testing: 실용적인 테스트 가이드 by 박우빈](https://www.inflearn.com/course/practical-testing-%EC%8B%A4%EC%9A%A9%EC%A0%81%EC%9D%B8-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B0%80%EC%9D%B4%EB%93%9C/dashboard)
 
+---
 ## Classicist vs Mockist
 * 우리 시스템 - 외부 시스템
 * 외부 시스템은 항상 정상 작동한다고 가정한다.
@@ -28,5 +29,14 @@ cafekiosk practical testing
     * 테스트 간 순서에 따라 테스트가 실패할 수 있다.
 * 한 눈에 들어오는 Test Fixture 구성하기
   * Test Fixture: given 절에서 생성한 모든 객체들을 지칭한다.
-  * @BeforeAll: 테스트 전 수행, @BeforeEach: 테스트 메서드 전에 수행
-  * @AfterEach: 테스트 후 @AfterAll : 테스트 클래스 전체가 끝난 후 수행
+    * @BeforeAll: 테스트 전 수행, @BeforeEach: 테스트 메서드 전에 수행
+      * @BeforeEach: 동일한 Fixture가 반복될 때 setUp에서 수행하도록 공유 자원을 지양하는 것과 동일한 역할
+          * 각 테스트 입장에서 봤을 때, 아예 몰라도 테스트 내용을 이해하는 데에 문제가 없는 객체만 선언한다.
+          * 수정해도 모든 테스트에 영향을 주지 않는 객체만 선언한다.
+    * @AfterEach: 테스트 후 @AfterAll : 테스트 클래스 전체가 끝난 후 수행
+  * data.sql 은 지양하라.
+    * given 데이터가 많은 경우 사용할 수도 있으나 코드가 파편화되어 유지보수가 어려워진다.
+  * 테스트 내 메서드는 꼭 필요한 필드만 명시하라.
+  * 테스트를 위한 빌더는 각 테스트 클래스 별로 정의하여 사용하라.
+    * 필요하면 목적에 맞게 빌더를 생성하도록
+  * 코틀린은 하나의 생성자만 사용하므로 편하다!
