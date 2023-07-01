@@ -5,8 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import sample.cafekiosk.spring.IntergrationTestSupport;
+import sample.cafekiosk.spring.domain.orderProduct.OrderProductRepository;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductRepository;
 import sample.cafekiosk.spring.domain.product.ProductSellingStatus;
@@ -19,17 +19,21 @@ import java.util.List;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@SpringBootTest
-class OrderRepositoryTest {
+//@SpringBootTest
+class OrderRepositoryTest extends IntergrationTestSupport {
 
   @Autowired
   private ProductRepository productRepository;
+
+  @Autowired
+  private OrderProductRepository orderProductRepository;
 
   @Autowired
   private OrderRepository orderRepository;
 
   @AfterEach
   void tearDown() {
+    orderProductRepository.deleteAllInBatch();
     productRepository.deleteAllInBatch();
     orderRepository.deleteAllInBatch();
   }

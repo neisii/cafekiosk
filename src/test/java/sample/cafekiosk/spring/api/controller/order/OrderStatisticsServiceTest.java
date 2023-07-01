@@ -4,9 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import sample.cafekiosk.spring.client.mail.MailSendClient;
+import org.springframework.transaction.annotation.Transactional;
+import sample.cafekiosk.spring.IntergrationTestSupport;
 import sample.cafekiosk.spring.domain.history.mail.MailSendHistory;
 import sample.cafekiosk.spring.domain.history.mail.MailSendHistoryRepository;
 import sample.cafekiosk.spring.domain.order.Order;
@@ -28,8 +27,9 @@ import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.SELLIN
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
 // 메일 전송 같이 긴 네트워크를 타는 등의 지연되는 로직에서는 @Transactional 을 걸지 않는 게 좋다.
-@SpringBootTest
-class OrderStatisticsServiceTest {
+// 같은 스프링부트 테스트라도 띄우는 테스트환경이 조금이라도 달라지는 경우 비용이 더 소모된다.
+@Transactional
+ class OrderStatisticsServiceTest extends IntergrationTestSupport {
 
   @Autowired
   private OrderStatisticsService orderStatisticsService;
@@ -45,9 +45,6 @@ class OrderStatisticsServiceTest {
 
   @Autowired
   private MailSendHistoryRepository mailSendHistoryRepository;
-
-  @MockBean
-  private MailSendClient mailSendClient;
 
   @AfterEach
   void tearDown() {

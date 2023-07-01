@@ -4,8 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+import sample.cafekiosk.spring.IntergrationTestSupport;
 import sample.cafekiosk.spring.api.controller.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.order.response.OrderResponse;
 import sample.cafekiosk.spring.api.service.stock.StockRepository;
@@ -23,11 +23,11 @@ import static org.assertj.core.api.Assertions.*;
 import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 
-@ActiveProfiles("test")
-//@Transactional // tearDown과 짝이다.
-@SpringBootTest // @Transactional이 주입되어 있지 않기 때문에 @DataJpaTest와 다르게 테스트 시 롤백 안된다.
+//@ActiveProfiles("test") //  extends IntergrationTestSupport
+@Transactional // tearDown과 짝이다.
+//@SpringBootTest // @Transactional이 주입되어 있지 않기 때문에 @DataJpaTest와 다르게 테스트 시 롤백 안된다. // extends IntergrationTestSupport
 //@DataJpaTest
-class OrderServiceTest {
+class OrderServiceTest extends IntergrationTestSupport {
 
   @Autowired
   private ProductRepository productRepository;
