@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import sample.cafekiosk.spring.ControllerTestSupport;
-import sample.cafekiosk.spring.api.controller.product.dto.request.ProductCreateServiceRequest;
+import sample.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
