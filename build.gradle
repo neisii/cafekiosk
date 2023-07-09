@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.12'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 group = 'sample'
@@ -12,6 +13,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    asciidoctorExt
 }
 
 repositories {
@@ -36,8 +38,37 @@ dependencies {
 
     // Guava
     implementation("com.google.guava:guava:32.1.0-jre")
+
+    // RESTDocs
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor' // 확장 플러그인
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+ext { // 전역 변수
+    snippetsDir = file('build/generated-snippets')
+}
+
+test { // 테스트 결과물 위치 지정
+    outputs.dir snippetsDir
+}
+
+asciidoctor { //
+    inputs.dir snippetsDir // 결과물을 받아서
+    configurations 'asciidoctorExt' // 문서를 만든다.
+
+    dependsOn test // gradle Task 순서 지정: test -> asciidoctor
+}
+
+bootJar { // Jar 생성
+    dependsOn asciidoctor // Task 순서 지정: asciidoctor -> bootJar
+    from('${asciidoctor.outputDir') {
+        into 'static.docs'// 결과물을 다음 경로로 복사한다.
+    }
+}
+
+// AsciiDocs 플러그인 설치

@@ -93,4 +93,20 @@ cafekiosk practical testing
     * `@builder, size() 정도는 OK`
 ## 키워드 정리
 
-##
+## Spring REST Docs
+* Spring REST Docs
+  * 테스트 코드를 통한 API 문서 자동화 도구
+  * API 명세를 문서로 만들고 외부에 제공함으로써 협업을 원활하게 한다.
+  * 기본적으로 AsciiDoc을 사용하여 문서를 작성한다.
+* REST Docs vs. Swagger
+  * REST Docs
+    * 테스트를 통과해야 문서가 만들어진다.(신뢰도가 높다.)
+    * 프로덕션 코드에 비침투적
+    * but, 코드 양이 많다
+    * 설정이 어렵다.
+  * Swagger
+    * 적용이 쉬움
+    * 문서에서 바로 API 호출을 수행해볼 수 있다.
+    * but, 프로덕션 코드에 비침투적 (코드가 드러워질 수 있다.)
+    * 테스트와 무관하기 때문에 상대적으로 신뢰도가 떨어질 수 있음.
+* 
